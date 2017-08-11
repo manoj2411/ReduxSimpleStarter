@@ -3,11 +3,11 @@ import VideoListItem from './video_list_item';
 
 const VideoList = (props) => {
 
-  const videoList = props.videos.map(video => <VideoListItem />)
+  const videoItems = props.videos.map(video => <VideoListItem key={video.etag} video={video}/>)
 
   return (
     <ul className="col-md-4 list-group">
-      {videoList}
+      {videoItems}
     </ul>
   );
 };
