@@ -15,25 +15,31 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {videos: []}
+    this.state = {
+      videos: [],
+      selectedVideo: undefined
+    };
     this.setVideostoProps = this.setVideostoProps.bind(this);
 
-    YTSearch({key: API_KEY, term: 'surfboards'}, this.setVideostoProps)
+    YTSearch({key: API_KEY, term: 'nature videos'}, this.setVideostoProps)
   }
 
   setVideostoProps(videos) {
-    // console.log('setVideostoProps');
-    // console.log(videos)
-    this.setState({videos});
-    // console.log(this.state.videos);
+    this.setState({
+      videos,
+      selectedVideo: videos[0]
+    });
   }
 
   render() {
     return (
       <div>
         <SearchBar />
-        <VideoDetail video={this.state.videos[0]} />
-        <VideoList videos={this.state.videos} />
+        <VideoDetail video={this.state.selectedVideo } />
+        <VideoList
+          videos={this.state.videos}
+          onVideoSelect={video => this.setState({selectedVideo: video})}
+        />
       </div>
     );
   }
