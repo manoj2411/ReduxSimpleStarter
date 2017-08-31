@@ -20,8 +20,12 @@ class App extends React.Component {
       selectedVideo: undefined
     };
     this.setVideostoProps = this.setVideostoProps.bind(this);
+    this.videoSearch = this.videoSearch.bind(this);
+    this.videoSearch();
+  }
 
-    YTSearch({key: API_KEY, term: 'nature videos'}, this.setVideostoProps)
+  videoSearch(searchTerm = 'green day') {
+    YTSearch({key: API_KEY, term: searchTerm}, this.setVideostoProps);
   }
 
   setVideostoProps(videos) {
@@ -34,7 +38,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <SearchBar />
+        <SearchBar changeSearchTerm={this.videoSearch} />
         <VideoDetail video={this.state.selectedVideo } />
         <VideoList
           videos={this.state.videos}
